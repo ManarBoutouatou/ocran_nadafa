@@ -12,7 +12,7 @@
               <div class="top-right clearfix">
                   <!-- Info List -->
                     <ul class="info-list">
-                        <li class="quote"><a href="{% url 'business:create_quote' %}">{% trans "Obtenez un devis gratuit" %}</a></li> 
+                        {% comment %} <li class="quote"><a href="{% url 'business:create_quote' %}">{% trans "Obtenez un devis gratuit" %}</a></li>  {% endcomment %}
                        
                     </ul>
 
@@ -47,16 +47,16 @@
                                   <li ><a href="/">{% trans "ACCUEIL" %}</a> </li>
                                 <li><a href="{% url 'business:about' %}">{% trans "PRÉSENTATION" %}</a> </li>
                                 <li ><a href="{% url 'business:service' %}">{% trans "SERVICES" %}</a> </li>
-                                <li><a href="{% url 'business:create_quote' %}">{% trans "DEVIS" %}</a> </li>
+                                <li><a href="{% url 'business:quote' %}">{% trans "DEVIS" %}</a> </li>
                                 <li ><a href="{% url 'business:recruiting' %}">{% trans "RECRUTEMENT" %}</a> </li>
                                 <li><a href="{% url 'business:contact' %}">{% trans "CONTACT" %}</a></li> 
                                 <li>
-                                    {% if LANGUAGE_CODE == 'ar-dz' %}
+                                    {% if LANGUAGE_CODE == 'ar' %}
                                         <a href="/fr/"> 
                                             <img src="{% static 'images/fr.png' %}"  alt="FR" title="FR" style="height:25px; width:35px;">
                                         </a>
                                     {% else %}
-                                        <a href="/ar-dz"> 
+                                        <a href="/ar"> 
                                             <img src="{% static 'images/dz.png' %}"  alt="AR" title="AR" style="height:25px; width:35px;">
                                         </a>
                                     {% endif %} 
@@ -64,9 +64,9 @@
 
                                         {% comment %} <ul>
                                             <li {% if LANGUAGE_CODE == 'fr' %} class="active"{% endif %}><a href="/fr"> <img src="{% static 'images/fr.png' %}"  alt="FR" title="FR" style="height:25px; width:35px;"></a></li>
-                                            <li {% if LANGUAGE_CODE == 'ar-dz' %} class="active "{% endif %}><a href="/ar-dz"><img src="{% static 'images/dz.png' %}"  alt="AR" title="AR" style="height:25px; width:35px;"></a></li>
+                                            <li {% if LANGUAGE_CODE == 'ar' %} class="active "{% endif %}><a href="/ar"><img src="{% static 'images/dz.png' %}"  alt="AR" title="AR" style="height:25px; width:35px;"></a></li>
                                             {% if config.ln_dz %}
-                                            <li {% if LANGUAGE_CODE == 'ar-dz' %} class="active "{% endif %}><a href="/ar-dz"><img src="{% static 'images/dz.png' %}"  alt="AR" title="AR" style="height:25px; width:35px;"></a></li>
+                                            <li {% if LANGUAGE_CODE == 'ar' %} class="active "{% endif %}><a href="/ar"><img src="{% static 'images/dz.png' %}"  alt="AR" title="AR" style="height:25px; width:35px;"></a></li>
                                             {% endif %}
                                             
                                         </ul>

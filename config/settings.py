@@ -38,26 +38,26 @@ INSTALLED_APPS = [
      # Apps
     'business',
     # third party
-    'rosetta',    
     "django_htmx",
     'tinymce',
     'modeltranslation',
     'django.contrib.admin',
+    'rosetta',    
     
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django_htmx.middleware.HtmxMiddleware",  # htmx
     'django.middleware.locale.LocaleMiddleware', # for translation
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',# csrf_token
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',   
-    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -122,7 +122,7 @@ gettext = lambda s: s
 LANGUAGES = (
     # ('en-us', _('English')),
     ('fr', _('Français')),
-    ('ar-dz', _('Algerian')),
+    ('ar', _('Arabic')),
 )
 MODELTRANSLATION_DEFAULT_LANGUAGE = 'fr'
 MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'fr'
@@ -136,34 +136,38 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-LOCALE_PATHS = [BASE_DIR / "locale"]
+
+# LOCALE_PATHS = [BASE_DIR / "locale"]
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = BASE_DIR / "static"
-MEDIA_URL = "/media/" 
-
-MEDIA_ROOT = BASE_DIR / "media"
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# STATICFILES_DIR = [ BASE_DIR / 'static' ]
-STATIC_ROOT = BASE_DIR / 'assets'
+STATIC_ROOT = BASE_DIR / "assets"
 STATICFILES_DIRS = ['static']
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     
     # other finders..
 )
+MEDIA_URL = "/media/" 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/' 
+MEDIA_ROOT = BASE_DIR / "media"
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# STATICFILES_DIR = [ BASE_DIR / 'static' ]
+
 ###
 
 # Default primary key field type
@@ -180,16 +184,7 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-##email 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.ocrannadafa.com'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_HOST_USER = 'website@ocrannadafa.com'
-EMAIL_HOST_PASSWORD = 'octopus2022'
-EMAIL_RECIPIENT = ['m.tebbouche@ocranservices.com']
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
 
 TINYMCE_DEFAULT_CONFIG = {
     "height": "320px",
@@ -205,3 +200,10 @@ TINYMCE_DEFAULT_CONFIG = {
     "custom_undo_redo_levels": 10,
     "language": "fr_FR"
 }
+
+
+try: 
+    from .local_settings import *
+except ImportError:
+    pass
+

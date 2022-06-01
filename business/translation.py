@@ -4,7 +4,6 @@ from .models import Bien, Formule, About, Service, Business
 
 
 
-
 class ServiceTranslationOptions(TranslationOptions):
     fields = ('name', 'about_high', 'about_low')
 
@@ -26,8 +25,6 @@ class FormuleTranslationOptions(TranslationOptions):
     fields = ('formule','description')
 
 translator.register(Formule, FormuleTranslationOptions)
-
-
 
 
 class BienTranslationOptions(TranslationOptions):
