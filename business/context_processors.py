@@ -1,9 +1,10 @@
-
+from django.shortcuts import render , get_object_or_404
+from .models import Business
 
 def infos(request):
-    context ={
-        'num_fix' : '025202020',
-        'moibile' : '025202020',
-        'business_name' : 'ocran nadafa',
-    }
-    return context
+    business = Business.objects.all().last()
+    return {
+            'business' : business,
+        }
+    
+
